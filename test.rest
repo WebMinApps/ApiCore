@@ -1,0 +1,44 @@
+@URL = http://api.core/
+@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzE4NTcyMDQsImV4cCI6MTUzMTk0MzYwNCwiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckBnbWFpbC5jb20iLCJwYXNzIjoiJDEkIURFUComOz0kNUljT3dWdmlVd1wvTDhZVHA5b3R0RzAiLCJuYW1lIjoiZGF2aWQiLCJsYXN0Ijoic2FsaW5hcyIsImJpcnRoIjoiMTk4MC0wNC0xMyIsImFjY2VzcyI6IjUiLCJhY3RpdmUiOiIxIn19.H0b3Yi42_bHtzcNZBiDYRRSiDUKsKknLW07GbET_3MY
+@FORMAT = ?format=json
+
+###
+GET {{URL}}/{{FORMAT}}
+
+###
+GET {{URL}}/about
+
+###
+POST {{URL}}login{{FORMAT}}
+
+{
+    "user":"admin",
+    "pass":"d0708aca"
+}
+
+###
+POST {{URL}}/user/check{{FORMAT}}
+
+
+{
+    "user":"admin"
+}
+
+###
+PUT {{URL}}user/
+Authorization: {{TOKEN}}
+
+{
+    "ID":"2",
+    "name":"david"
+}
+
+
+###
+DELETE {{URL}}user{{FORMAT}}
+Authorization: {{TOKEN}}
+
+{
+    "ID":"100",
+    "from":"1"
+}
