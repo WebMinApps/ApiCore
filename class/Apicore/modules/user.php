@@ -2,16 +2,14 @@
 namespace apicore\modules;
 
 include_once(__DIR__.'/../../config/config.php');
-require_once(__DIR__.'/../../config/lang/esES.php');
+require_once(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config/lang/esES.php');
 
 class user extends \Apicore\bin\Core{
 
     // Variables de Clase
-    private
-    $db,$t;
+    private $db,$t;
 
-    protected
-    $cols = [
+    protected $cols = [
         'user'   => true,
         'pass'   => true,
         'name'   => false,
@@ -24,8 +22,13 @@ class user extends \Apicore\bin\Core{
 
     // Funcion Constructora
     function __construct($ID=false){
-        global $conexion, $JWT_DATA;
+
+        global $conexion, $JWT_DATA, $lang;
         $this->t = 'users';
+
+        $this->l = $lang['user'];
+
+        //var_dump($this->l);
 
         // Json Web Token
         $this->JWT = new \Firebase\JWT\JWT;
@@ -34,10 +37,13 @@ class user extends \Apicore\bin\Core{
         $this->db = new \Medoo\Medoo($conexion);
 
         // Verifica si la table existe
-        $tdbr = $this->db->select($this->t,'*');
+        $tdbr = $this->db->table_exist($this->t);
 
         // Si no hay tabla
-        if(!$tdbr){}
+        if(!$tdbr){
+            // Create table data
+
+        }
 
         if($ID){
             $this->msg = "Cargado ".HOY;
@@ -354,7 +360,8 @@ class user extends \Apicore\bin\Core{
                 return $this->response(null,null,'You cannot edit without credentials',400);
             }
         }else{
-            return $this->response(null,null,'You Must Specify the user to edit',400);
+            var_dump($this->l['noeditself']);
+            return $this->response(null,null,$this->l['editnouser'],400);
         }
     }
 

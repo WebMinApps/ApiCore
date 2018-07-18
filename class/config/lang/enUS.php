@@ -23,5 +23,4 @@ $lang = [
         'admin'         => 'Acceso de Administrador',
         'noadmin'       => 'Solo administradores tienen acceso a este recurso'
     ]
-
 ];

@@ -821,7 +821,7 @@ class Medoo
 				}
 				elseif ($raw = $this->buildRaw($ORDER, $map))
 				{
-					$where_clause .= ' ORDER BY ' . $raw;	
+					$where_clause .= ' ORDER BY ' . $raw;
 				}
 				else
 				{
@@ -839,7 +839,7 @@ class Medoo
 					{
 						$LIMIT = [0, $LIMIT];
 					}
-					
+
 					if (
 						is_array($LIMIT) &&
 						is_numeric($LIMIT[ 0 ]) &&
@@ -1427,113 +1427,80 @@ class Medoo
 
 		$query = $this->exec('SELECT EXISTS(' . $this->selectContext($table, $map, $join, $column, $where, 1) . ')', $map);
 
-		if ($query)
-		{
+		if ($query){
 			$result = $query->fetchColumn();
-
 			return $result === '1' || $result === true;
 		}
-
 		return false;
 	}
 
-	private function aggregate($type, $table, $join = null, $column = null, $where = null)
-	{
+	private function aggregate($type, $table, $join = null, $column = null, $where = null){
 		$map = [];
-
 		$query = $this->exec($this->selectContext($table, $map, $join, $column, $where, strtoupper($type)), $map);
 
-		if ($query)
-		{
+		if ($query){
 			$number = $query->fetchColumn();
-
 			return is_numeric($number) ? $number + 0 : $number;
 		}
-
 		return false;
 	}
 
-	public function action($actions)
-	{
-		if (is_callable($actions))
-		{
+	public function action($actions){
+		if (is_callable($actions)){
 			$this->pdo->beginTransaction();
-
 			try {
 				$result = $actions($this);
-
-				if ($result === false)
-				{
+				if ($result === false){
 					$this->pdo->rollBack();
-				}
-				else
-				{
+				}else{
 					$this->pdo->commit();
 				}
 			}
 			catch (Exception $e) {
 				$this->pdo->rollBack();
-
 				throw $e;
 			}
-
 			return $result;
 		}
-
 		return false;
 	}
 
-	public function id()
-	{
+	public function id(){
 		$type = $this->type;
-
-		if ($type === 'oracle')
-		{
+		if ($type === 'oracle'){
 			return 0;
 		}
-		elseif ($type === 'mssql')
-		{
+		elseif ($type === 'mssql'){
 			return $this->pdo->query('SELECT SCOPE_IDENTITY()')->fetchColumn();
 		}
-		elseif ($type === 'pgsql')
-		{
+		elseif ($type === 'pgsql'){
 			return $this->pdo->query('SELECT LASTVAL()')->fetchColumn();
 		}
-
 		return $this->pdo->lastInsertId();
 	}
 
-	public function debug()
-	{
+	public function debug(){
 		$this->debug_mode = true;
-
 		return $this;
 	}
 
-	public function error()
-	{
+	public function error(){
 		return $this->statement ? $this->statement->errorInfo() : null;
 	}
 
-	public function last()
-	{
+	public function last(){
 		$log = end($this->logs);
-
 		return $this->generate($log[ 0 ], $log[ 1 ]);
 	}
 
-	public function log()
-	{
-		return array_map(function ($log)
-			{
+	public function log(){
+		return array_map(function ($log){
 				return $this->generate($log[ 0 ], $log[ 1 ]);
-			},
-			$this->logs
+			},$this->logs
 		);
 	}
 
-	public function info()
-	{
+	public function info(){
 		$output = [
 			'server' => 'SERVER_INFO',
 			'driver' => 'DRIVER_NAME',
@@ -1541,13 +1508,18 @@ class Medoo
 			'version' => 'SERVER_VERSION',
 			'connection' => 'CONNECTION_STATUS'
 		];
-
 		foreach ($output as $key => $value)
 		{
 			$output[ $key ] = @$this->pdo->getAttribute(constant('PDO::ATTR_' . $value));
 		}
-
 		return $output;
+	}
+
+	function table_exist($tableName){
+		$query = "SELECT COUNT(*) FROM $tableName";
+		$result = $this->pdo->query($query);
+		$num_rows = $result->rowCount();
+		return ($num_rows === false)? false : true;
 	}
 }
 ?>

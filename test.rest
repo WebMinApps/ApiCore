@@ -1,14 +1,14 @@
 @URL = http://api.core/
-@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzE4NTcyMDQsImV4cCI6MTUzMTk0MzYwNCwiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckBnbWFpbC5jb20iLCJwYXNzIjoiJDEkIURFUComOz0kNUljT3dWdmlVd1wvTDhZVHA5b3R0RzAiLCJuYW1lIjoiZGF2aWQiLCJsYXN0Ijoic2FsaW5hcyIsImJpcnRoIjoiMTk4MC0wNC0xMyIsImFjY2VzcyI6IjUiLCJhY3RpdmUiOiIxIn19.H0b3Yi42_bHtzcNZBiDYRRSiDUKsKknLW07GbET_3MY
+@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzE5MjkyOTMsImV4cCI6MTUzMjAxNTY5MywiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckBnbWFpbC5jb20iLCJwYXNzIjoiJDEkIURFUComOz0kNUljT3dWdmlVd1wvTDhZVHA5b3R0RzAiLCJuYW1lIjoiZGF2aWQiLCJsYXN0Ijoic2FsaW5hcyIsImJpcnRoIjoiMTk4MC0wNC0xMyIsImFjY2VzcyI6IjUiLCJhY3RpdmUiOiIxIn19.kqvcrQ295JVaB0sRJeLIxDxo2haarm_O1WS6qMQ_p5g
 @FORMAT = ?format=json
 
-###
+### Main
 GET {{URL}}/{{FORMAT}}
 
-###
+### About Page
 GET {{URL}}/about
 
-###
+### Login user
 POST {{URL}}login{{FORMAT}}
 
 {
@@ -16,16 +16,15 @@ POST {{URL}}login{{FORMAT}}
     "pass":"d0708aca"
 }
 
-###
+### Check if user exist
 POST {{URL}}/user/check{{FORMAT}}
-
 
 {
     "user":"admin"
 }
 
-###
-PUT {{URL}}user/
+### Editar Usuario
+PUT {{URL}}/user{{FORMAT}}
 Authorization: {{TOKEN}}
 
 {
