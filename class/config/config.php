@@ -174,9 +174,8 @@ function prefered_language ($available_languages,$http_accept_language="auto") {
 
 
 $langs = [
-    'en' => 'enUS',
-    'es' => 'esES'
-
+    'es' => 'esES',
+    'en' => 'enUS'
 ];
 
 $pref_lang = prefered_language(array_keys($langs));

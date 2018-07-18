@@ -45,7 +45,7 @@ class ApiCore extends bin\Core {
 
     /**
      * Eliminar Usurio.
-     * @url DELETE /user
+     * @url DELETE /user/del
      */
     public function delete_user(){
         return $this->user->del($this->data);
@@ -53,9 +53,10 @@ class ApiCore extends bin\Core {
 
     /**
      * Editar Usuario [Datos, Quien, Por].
-     * @url PUT /user
+     * @url POST /user/edit
      */
     public function edit_user(){
+
         return $this->user->edit($this->data);
     }
 

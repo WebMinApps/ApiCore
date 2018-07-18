@@ -24,17 +24,19 @@ POST {{URL}}/user/check{{FORMAT}}
 }
 
 ### Editar Usuario
-PUT {{URL}}/user{{FORMAT}}
+POST {{URL}}/user/edit{{FORMAT}}
 Authorization: {{TOKEN}}
 
 {
     "ID":"2",
-    "name":"david"
+    "from":"1",
+    "data":{
+        "name":"david"
+    }
 }
 
-
 ###
-DELETE {{URL}}user{{FORMAT}}
+POST {{URL}}user/del{{FORMAT}}
 Authorization: {{TOKEN}}
 
 {

@@ -28,8 +28,6 @@ class user extends \Apicore\bin\Core{
 
         $this->l = $lang['user'];
 
-        //var_dump($this->l);
-
         // Json Web Token
         $this->JWT = new \Firebase\JWT\JWT;
 
@@ -360,7 +358,6 @@ class user extends \Apicore\bin\Core{
                 return $this->response(null,null,'You cannot edit without credentials',400);
             }
         }else{
-            var_dump($this->l['noeditself']);
             return $this->response(null,null,$this->l['editnouser'],400);
         }
     }
