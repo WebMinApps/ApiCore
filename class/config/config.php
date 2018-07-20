@@ -57,10 +57,10 @@ date_default_timezone_set(TIMEZONE);
 $MySQL = [
     // required
     'database_type' => 'mysql',
-    'database_name' => 'name',
+    'database_name' => 'globaltr_nextlevel',
     'server' => 'localhost',
-    'username' => 'your_username',
-    'password' => 'your_password',
+    'username' => 'globaltr_nluser',
+    'password' => 'tvxq1aca',
 
     // [optional]
     'charset' => 'utf8',
@@ -109,7 +109,9 @@ $memory = [
     'database_file' => ':memory:'
 ];
 
-$conexion = $SQLite;
+//$conexion = $SQLite;
+//$conexion = $MySQL;
+//$conexion = $memory;
 
 $JWT_DATA = [
     "token_base" => array(

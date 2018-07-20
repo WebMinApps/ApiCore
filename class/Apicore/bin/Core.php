@@ -13,6 +13,9 @@ abstract class Core{
     // Reservado Sistema
     protected $auth, $data, $head;
 
+    // Variables de Clase
+    private $db,$t;
+
     // Codigos de Error en HTTP
     protected $codes = array(
         '100' => 'Continue',

@@ -6,9 +6,6 @@ require_once(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY
 
 class user extends \Apicore\bin\Core{
 
-    // Variables de Clase
-    private $db,$t;
-
     protected $cols = [
         'user'   => true,
         'pass'   => true,
@@ -32,7 +29,12 @@ class user extends \Apicore\bin\Core{
         $this->JWT = new \Firebase\JWT\JWT;
 
         // Conexion a la Base de Datos
-        $this->db = new \Medoo\Medoo($conexion);
+        try{
+            $this->db = new \Medoo\Medoo($conexion);
+        }catch(\Medoo\Medoo\PDOException $e){
+            echo $e->getMessage();
+        }
+
 
         // Verifica si la table existe
         $tdbr = $this->db->table_exist($this->t);

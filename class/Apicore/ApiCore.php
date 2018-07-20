@@ -4,7 +4,11 @@ namespace ApiCore;
 class ApiCore extends bin\Core {
     function __construct(){
         bin\Core::__construct();
-        $this->user = new modules\user;
+        try{
+            $this->user = new modules\user;
+        }catch(PDOException $e){
+            die('no se pudo conectar');
+        }
     }
 
     /**

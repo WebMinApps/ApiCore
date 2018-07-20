@@ -238,7 +238,10 @@ class Medoo
 			}
 		}
 		catch (PDOException $e) {
-			throw new PDOException($e->getMessage());
+			//throw new PDOException($e->getMessage());
+			$errorformat = json_encode(['data'=>null,'message'=>null,'error'=>$e->getMessage(),'code'=>'200']);
+
+			die($errorformat);
 		}
 	}
 
