@@ -109,7 +109,7 @@ $memory = [
     'database_file' => ':memory:'
 ];
 
-//$conexion = $SQLite;
+$conexion = $SQLite;
 //$conexion = $MySQL;
 //$conexion = $memory;
 

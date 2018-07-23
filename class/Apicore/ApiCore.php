@@ -41,7 +41,22 @@ class ApiCore extends bin\Core {
     /**
      * Nuevo Usuario.
      * @noAuth
-     * @url POST /user
+     * @url POST /user/$id
+     */
+    public function users($id = null){
+        $user = null;
+        if($id){
+            $user = $this->user->user($id);
+        }else{
+            $user = $this->user->user();
+        }
+        return $user;
+     }
+
+    /**
+     * Nuevo Usuario.
+     * @noAuth
+     * @url POST /user/new
      */
     public function new_user(){
        return $this->user->add($this->data);
@@ -49,7 +64,7 @@ class ApiCore extends bin\Core {
 
     /**
      * Eliminar Usurio.
-     * @url DELETE /user/del
+     * @url POST /user/del
      */
     public function delete_user(){
         return $this->user->del($this->data);

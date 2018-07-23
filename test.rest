@@ -1,5 +1,5 @@
 @URL = http://api.core/
-@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzE5MjkyOTMsImV4cCI6MTUzMjAxNTY5MywiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckBnbWFpbC5jb20iLCJwYXNzIjoiJDEkIURFUComOz0kNUljT3dWdmlVd1wvTDhZVHA5b3R0RzAiLCJuYW1lIjoiZGF2aWQiLCJsYXN0Ijoic2FsaW5hcyIsImJpcnRoIjoiMTk4MC0wNC0xMyIsImFjY2VzcyI6IjUiLCJhY3RpdmUiOiIxIn19.kqvcrQ295JVaB0sRJeLIxDxo2haarm_O1WS6qMQ_p5g
+@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzIzNTgzMDIsImV4cCI6MTUzMjQ0NDcwMiwiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckBnbWFpbC5jb20iLCJwYXNzIjoiJDEkIURFUComOz0kNUljT3dWdmlVd1wvTDhZVHA5b3R0RzAiLCJuYW1lIjoiZGF2aWQiLCJsYXN0Ijoic2FsaW5hcyIsImJpcnRoIjoiMTk4MC0wNC0xMyIsImFjY2VzcyI6IjUiLCJhY3RpdmUiOiIxIn19.os8KiBOVhEUkX50q4eCtgXzzi8x_rlaehzvQ7z-mAv0
 @FORMAT = ?format=json
 
 ### Main
@@ -23,6 +23,21 @@ POST {{URL}}/user/check{{FORMAT}}
     "user":"admin"
 }
 
+### Crear Usuario
+POST {{URL}}/user/edit{{FORMAT}}
+Authorization: {{TOKEN}}
+
+{
+   "user":"saotand",
+   "pass":"tvxq1aca",
+   "name":"David",
+   "last":"Salinas",
+   "email":"saotand@gmail.com",
+   "birth":"1983-04-13",
+   "access":"5",
+   "active":"0"
+}
+
 ### Editar Usuario
 POST {{URL}}/user/edit{{FORMAT}}
 Authorization: {{TOKEN}}
@@ -31,7 +46,7 @@ Authorization: {{TOKEN}}
     "ID":"2",
     "from":"1",
     "data":{
-        "name":"david"
+        "name":"sa"
     }
 }
 
@@ -40,6 +55,6 @@ POST {{URL}}user/del{{FORMAT}}
 Authorization: {{TOKEN}}
 
 {
-    "ID":"100",
+    "ID":"2",
     "from":"1"
 }

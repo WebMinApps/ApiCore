@@ -83,15 +83,14 @@ class user extends \Apicore\bin\Core{
 
     // Mostrar la informacion de un usuarios o todos
     function user($ID = NULL, $cols = null){
-        if(is_null($cols)){
-            $cols = array_keys($this->cols);
-        }
+        if(is_null($cols)){ $cols = array_keys($this->cols); }
         unset($cols['pass']);
         if($ID){
             $user = $this->db->get($this->t,$cols,['ID'=>$ID]);
         }else{
             $user = $this->db->select($this->t,$cols);
         }
+        var_dump($this->db->last());
         return $user;
     }
 
@@ -255,6 +254,7 @@ class user extends \Apicore\bin\Core{
                     $deleted = $this->db->delete($this->t,['ID'=>$ID]);
                     $afected = $deleted->rowCount();
                     if($afected > 0){
+                        $this->db->delete('user_config',['ID'=>$ID]);
                         return $this->response(null,'User Deleted');
                     }else{
                         return $this->response(null,null,'User do not exist or is already deleted',406);
