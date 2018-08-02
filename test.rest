@@ -1,5 +1,5 @@
 @URL = http://api.core/
-@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzIzNTgzMDIsImV4cCI6MTUzMjQ0NDcwMiwiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckBnbWFpbC5jb20iLCJwYXNzIjoiJDEkIURFUComOz0kNUljT3dWdmlVd1wvTDhZVHA5b3R0RzAiLCJuYW1lIjoiZGF2aWQiLCJsYXN0Ijoic2FsaW5hcyIsImJpcnRoIjoiMTk4MC0wNC0xMyIsImFjY2VzcyI6IjUiLCJhY3RpdmUiOiIxIn19.os8KiBOVhEUkX50q4eCtgXzzi8x_rlaehzvQ7z-mAv0
+@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzI1MDA5MzMsImV4cCI6MTUzMjU4NzMzMywiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckB3ZWJtaW5hcHBzLmNvbSIsInBhc3MiOiIkMSQhREVQKiY7PSRINk54dkJyZnQwbVd3QkxDU3RPMjYwIiwibmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0IjoiU3lzdGVtIiwiYmlydGgiOiIxOTgzLTA0LTEzIiwiYWNjZXNzIjoiNSIsImFjdGl2ZSI6IjEifX0.wMJBTdDS0Q-7T6kfQIbEmdaFo_Qn0hT0_Kr9vEKwHpc
 @FORMAT = ?format=json
 
 ### Main
@@ -8,12 +8,34 @@ GET {{URL}}/{{FORMAT}}
 ### About Page
 GET {{URL}}/about
 
+### User data ID
+GET {{URL}}user/1
+Authorization: {{TOKEN}}
+
+### User List
+GET {{URL}}/user
+Authorization: {{TOKEN}}
+
 ### Login user
 POST {{URL}}login{{FORMAT}}
 
 {
     "user":"admin",
-    "pass":"d0708aca"
+    "pass":"tvxq1aca"
+}
+
+### New User
+POST {{URL}}user/new{{FORMAT}}
+
+{
+    "user":"saotand",
+    "email":"saotand@gmail.com",
+    "pass":"d0708aca",
+    "name":"David",
+    "last":"Salinas",
+    "birth":"1983-04-13",
+    "access":"5",
+    "active":"1"
 }
 
 ### Check if user exist
@@ -28,14 +50,18 @@ POST {{URL}}/user/edit{{FORMAT}}
 Authorization: {{TOKEN}}
 
 {
-   "user":"saotand",
-   "pass":"tvxq1aca",
-   "name":"David",
-   "last":"Salinas",
-   "email":"saotand@gmail.com",
-   "birth":"1983-04-13",
-   "access":"5",
-   "active":"0"
+    "from":"1",
+    "ID":"1",
+    "data":{
+        "user":"saotand",
+        "pass":"d0708aca",
+        "name":"David",
+        "last":"Salinas",
+        "email":"saotand@gmail.com",
+        "birth":"1983-04-13",
+        "access":"5",
+        "active":"1"
+    }
 }
 
 ### Editar Usuario

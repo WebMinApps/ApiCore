@@ -17,6 +17,9 @@ class user extends \Apicore\bin\Core{
         'active' => false
     ];
 
+    // LANG required errors
+    protected $unique;
+
     // Funcion Constructora
     function __construct($ID=false){
 
@@ -27,6 +30,11 @@ class user extends \Apicore\bin\Core{
 
         // Json Web Token
         $this->JWT = new \Firebase\JWT\JWT;
+
+        $this->unique = [
+            'email' => $this->l['usernametaken'],
+            'user'  => $this->l['emailtaken']
+        ];
 
         // Conexion a la Base de Datos
         try{
@@ -87,10 +95,11 @@ class user extends \Apicore\bin\Core{
         unset($cols['pass']);
         if($ID){
             $user = $this->db->get($this->t,$cols,['ID'=>$ID]);
+            if(!$user){ $user = []; }else{ $user['pass'] = '***********';}
         }else{
             $user = $this->db->select($this->t,$cols);
         }
-        var_dump($this->db->last());
+
         return $user;
     }
 
@@ -179,7 +188,7 @@ class user extends \Apicore\bin\Core{
                         // Variable Requerida y existente [OK]
                         if($key === "user" || $key === "email"){
                             if($key === "email"){
-                                $checkemail = filter_var($add_data[$key], FILTER_VALIDATE_EMAIL);
+                                $checkemail = filter_var($data[$key], FILTER_VALIDATE_EMAIL);
                                 if($checkemail){
                                     // Formato de correo electronico valido
                                     $add_data[$key] = strtolower($data[$key]);
@@ -199,7 +208,7 @@ class user extends \Apicore\bin\Core{
                         }
                     }else{
                         // Variable Requerida y no Existe [Error]
-                        return $this->response(null,null,'Falta un campo requerido '.$key,'400');
+                        return $this->response(null,null,sprintf($this->l['requiredfield'],$key),'400');
                     }
                 }else{
                     // Variable no requerida [OK] si existe o no
@@ -231,14 +240,15 @@ class user extends \Apicore\bin\Core{
             if($error[2]){
                 $serror = null;
                 if(MODE == "debug"){ $serror = ' '.$error[2]; }
-                return $this->response(null,null,'Error en consulta DB'.$serror,'406');
+                return $this->response(null,null,sprintf($this->l['databaserror'],$serror),406);
             }
             if(!empty($id)){
                 //array_unshift($add_data,array());
                 $add_data = array('ID'=>$this->db->id()) + $add_data;
-                return $this->response($add_data,USER.CREATED);
+                $newconf = $this->db->insert($this->t,['ID'=>$id,'theme'=>1,'ip'=>$_SERVER['SERVER_ADDR'],'count'=>0]);
+                return $this->response($add_data,$this->l['create']);
             }else{
-                return $this->response(null,'No se Realizaron cambios',null,'200');
+                return $this->response(null,$this->t['nochanges'],null,'200');
             }
         }
 
@@ -288,11 +298,32 @@ class user extends \Apicore\bin\Core{
     function edit($data){
         $ID = isset($data['ID'])?$data['ID']:NULL;
         $from = isset($data['from'])?$data['from']:NULL;
-        $data = isset($data['data'])?$this->check_data($data['data'],true):NULL;
+        $datat = isset($data['data'])?$this->check_data($data['data'],true):NULL;
         $w = ['ID'=>$ID];
         if($ID){
             if($from){
                 if($data){
+                    // Checks data info
+                    foreach($datat as $col => $val){
+                        if($col === "user"){
+                            if($this->exists([$col=>$val])){
+                                // En caso de que Exista el nombre de usuario
+                                return $this->response(null,null,$this->l['exist'],406);
+                            }
+                            $data[$col] = ucwords($val);
+                        }elseif($col === "pass"){
+                            $data[$col] = $this->crypt_pass($val);
+                        }elseif($col === "email"){
+                            if($this->exists([$col=>$val])){
+                                // En caso de que exista el Email
+                                return $this->response(null,null,$this->l['emailexist'],406);
+                            }
+                            $data[$col] = ucwords($val);
+                        }else{
+                            $data[$col] = ucwords($val);
+                        }
+                    }
+
                     // Edit Data
                     if($ID === $from){
                         // Same user edit

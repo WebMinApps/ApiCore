@@ -41,14 +41,15 @@ class ApiCore extends bin\Core {
     /**
      * Nuevo Usuario.
      * @noAuth
-     * @url POST /user/$id
+     * @url GET /user
+     * @url GET /user/$id
      */
     public function users($id = null){
         $user = null;
         if($id){
-            $user = $this->user->user($id);
+            $this->response($user = $this->user->user($id));
         }else{
-            $user = $this->user->user();
+            $this->response($user = $this->user->user());
         }
         return $user;
      }
