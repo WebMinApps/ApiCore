@@ -124,6 +124,7 @@ class user extends \Apicore\bin\Core{
         $c = ['ID','user','email','pass','name','last','birth','access','active'];
         $u = isset($data['user'])?(strtolower($data['user'])):NULL;
         $p = isset($data['pass'])?($this->crypt_pass($data['pass'])):NULL;
+
         if($u){
             if($p){
                 $w = ['OR'=>['user'=>$u,'email'=>$u],'pass'=>$p];

@@ -100,7 +100,7 @@ abstract class Core{
     }
 
     // Respuesta por defecto de clase
-    public function response($data=null, $message = 'OK', $error = null, $code = '200'){
+    public function response($data=null, $message = null, $error = null, $code = '200'){
         if($code == '200'){
             http_response_code($code);
             return [ "data"=>$data, "message" => $message, "error"=>$error, "code"=>$code];
@@ -109,10 +109,13 @@ abstract class Core{
             return [ "data"=>$data, "message" => $message, "error"=>$error, "code"=>$code];
         }elseif($code >= 300 && $code <= 399){
             throw new RestException($code, $error);
+            return ["error"=>$error, "code"=>$code];
         }elseif($code >= 400 && $code <= 499){
             throw new RestException($code, $error);
+            return ["error"=>$error, "code"=>$code];
         }elseif($code >= 500 && $code <= 599){
             throw new RestException($code, $error);
+            return ["error"=>$error, "code"=>$code];
         }
     }
 

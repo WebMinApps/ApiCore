@@ -17,7 +17,7 @@ GET {{URL}}/user
 Authorization: {{TOKEN}}
 
 ### Login user
-POST {{URL}}login{{FORMAT}}
+POST http://api.core/login?format=json
 
 {
     "user":"admin",
