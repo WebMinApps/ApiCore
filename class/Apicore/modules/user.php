@@ -151,7 +151,12 @@ class user extends \Apicore\bin\Core{
                             $data['count'] = 1;
                             $this->db->insert($tc,$data);
                         }
-                        return $this->response(['Token'=>$this->token],'Usuario Cargado');
+                        $datareturn = [
+                            'token'=>$this->token,
+                            'user' => $user
+
+                        ];
+                        return $this->response($datareturn,'Usuario Cargado');
                     }else{
                         return $this->response(null,null,'Cuenta de usuario inactiva', '401');
                     }
