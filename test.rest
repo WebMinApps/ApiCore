@@ -1,5 +1,5 @@
 @URL = http://api.core/
-@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzI1MDA5MzMsImV4cCI6MTUzMjU4NzMzMywiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckB3ZWJtaW5hcHBzLmNvbSIsInBhc3MiOiIkMSQhREVQKiY7PSRINk54dkJyZnQwbVd3QkxDU3RPMjYwIiwibmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0IjoiU3lzdGVtIiwiYmlydGgiOiIxOTgzLTA0LTEzIiwiYWNjZXNzIjoiNSIsImFjdGl2ZSI6IjEifX0.wMJBTdDS0Q-7T6kfQIbEmdaFo_Qn0hT0_Kr9vEKwHpc
+@TOKEN = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzQ0NzI3NTQsImV4cCI6MTUzNDU1OTE1NCwiZGF0YSI6eyJJRCI6IjEiLCJ1c2VyIjoiYWRtaW4iLCJlbWFpbCI6IndlYm1hc3RlckB3ZWJtaW5hcHBzLmNvbSIsInBhc3MiOiIkMSQhREVQKiY7PSRINk54dkJyZnQwbVd3QkxDU3RPMjYwIiwibmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0IjoiU3lzdGVtIiwiYmlydGgiOiIxOTgzLTA0LTEzIiwiYWNjZXNzIjoiNSIsImFjdGl2ZSI6IjEifX0.4xcAOiUnodor9k_GyFiOSN3H2TX9UnhRHTWRDqXxFGo
 @FORMAT = ?format=json
 
 ### Main
@@ -50,8 +50,8 @@ POST {{URL}}/user/edit{{FORMAT}}
 Authorization: {{TOKEN}}
 
 {
-    "from":"1",
-    "ID":"1",
+    "from":"2",
+    "ID":"2",
     "data":{
         "user":"saotand",
         "pass":"d0708aca",
