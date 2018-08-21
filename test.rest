@@ -84,3 +84,11 @@ Authorization: {{TOKEN}}
     "ID":"2",
     "from":"1"
 }
+
+
+###
+GET {{URL}}task{{FORMAT}}
+
+###
+GET {{URL}}task/1{{FORMAT}}
+
